@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "558048588976",
+    "firebase_url": "https://mantenimientoelectrodome-dec3d.firebaseio.com",
+    "project_id": "mantenimientoelectrodome-dec3d",
+    "storage_bucket": "mantenimientoelectrodome-dec3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558048588976:android:613f998e3a9e0591883775",
+        "android_client_info": {
+          "package_name": "com.uco.mantenimientoelectrodomesticos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558048588976-1t4h7m771u4o0kjvbf6aomcesc29lo5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq4GW7LT82wpafdwFGLqZ0zzGGLADufvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558048588976-1t4h7m771u4o0kjvbf6aomcesc29lo5a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
