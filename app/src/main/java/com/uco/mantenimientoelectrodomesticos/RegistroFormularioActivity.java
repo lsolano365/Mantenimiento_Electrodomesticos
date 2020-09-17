@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uco.mantenimientoelectrodomesticos.validaciones.ConfigurarTexto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,22 +26,22 @@ public class RegistroFormularioActivity extends AppCompatActivity {
 
     private Button guardar;
     public Propietario propietario;
-    DatabaseReference mDatabase;
-    private List<Propietario> listadoPropietarios;
+    private List<Propietario> listadoPropietarios = new ArrayList<>();
+    boolean bandera;
 
     private EditText nombre, correo, identificacion, direccion, telefono;
+
+    int contador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_formulario);
 
-        if(getSupportActionBar()!= null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         guardar = (Button) findViewById(R.id.btnGuardar);
 
@@ -60,45 +61,34 @@ public class RegistroFormularioActivity extends AppCompatActivity {
     }
 
     private void guardarDatos() {
-
-        listadoPropietarios = new ArrayList<>();
-
+        bandera = false;
         String idPropietario = identificacion.getText().toString().trim();
-        String nombrePropietario = nombre.getText().toString();
+        String nombrePropietario = ConfigurarTexto.validarEspacios(nombre.getText().toString());
         String correoPropietario = correo.getText().toString().trim();
-        String direccionPropietario = direccion.getText().toString();
-        String telefonoPropietario = telefono.getText().toString();
+        String direccionPropietario = ConfigurarTexto.validarEspacios(direccion.getText().toString());
+        String telefonoPropietario = ConfigurarTexto.validarEspacios(telefono.getText().toString());
 
-        propietario = new Propietario(idPropietario, nombrePropietario, correoPropietario, direccionPropietario, telefonoPropietario);
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("nombre", nombrePropietario);
-        map.put("idP", idPropietario);
-        map.put("correo", correoPropietario);
-        map.put("telefono", telefonoPropietario);
-        map.put("direccion", direccionPropietario);
-
-
-        mDatabase.child("propietario").child(propietario.getIdPropietario()).setValue(map);
-        mDatabase.child("propietario").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Propietario propietariosDatabase = postSnapshot.getValue(Propietario.class);
-                    listadoPropietarios.add(propietariosDatabase);
+        if (!idPropietario.isEmpty() && !nombrePropietario.isEmpty() && !correoPropietario.isEmpty() && !direccionPropietario.isEmpty() && !telefonoPropietario.isEmpty()) {
+            if (listadoPropietarios.size() == 0) {
+                listadoPropietarios.add(new Propietario(idPropietario, nombrePropietario, correoPropietario, direccionPropietario, telefonoPropietario));
+                Toast.makeText(this, "Se registró con exito", Toast.LENGTH_SHORT).show();
+            } else {
+                for (Propietario prop: listadoPropietarios) {
+                    if(prop.getIdPropietario().equals(idPropietario)){
+                        bandera = true;
+                    }
                 }
-                Toast.makeText(getBaseContext(), "listado: " + listadoPropietarios, Toast.LENGTH_LONG).show();
-                Toast.makeText(getBaseContext(), "Se ha registrado con exito! " + propietario.getNombre(), Toast.LENGTH_SHORT).show();
+                if(bandera){
+                    Toast.makeText(this, "Ya existe una persona con esta identificación",Toast.LENGTH_SHORT).show();
+                }else{
+                    listadoPropietarios.add(new Propietario(idPropietario, nombrePropietario, correoPropietario, direccionPropietario, telefonoPropietario));
+                }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getBaseContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
+        } else {
+            Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT).show();
+        }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

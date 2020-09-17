@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 
@@ -27,49 +29,33 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     private List<Propietario> listadoPropietarios;
     private Propietario propietario;
-    DatabaseReference mDatabase;
 
 
 
     @Test
     public void guardarDatos() {
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
         listadoPropietarios = new ArrayList<>();
 
         String idPropietario = "1036962400";
         String nombrePropietario = "Luis Eduardo";
-        String correoPropietario = "luchito0841@gmail.com";
+        String correoPropietario = null;
         String direccionPropietario = "marinilla";
         String telefonoPropietario = "3116856400";
 
         propietario = new Propietario(idPropietario, nombrePropietario, correoPropietario, direccionPropietario, telefonoPropietario);
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("nombre", nombrePropietario);
-        map.put("idP", idPropietario);
-        map.put("correo", correoPropietario);
-        map.put("telefono", telefonoPropietario);
-        map.put("direccion", direccionPropietario);
-
-
-        mDatabase.child("propietario").child(propietario.getIdPropietario()).setValue(map);
-        mDatabase.child("propietario").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Propietario propietariosDatabase = postSnapshot.getValue(Propietario.class);
-                    listadoPropietarios.add(propietariosDatabase);
-                }
-                assertNotNull(propietario.getIdPropietario());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
     }
+    @Test
+    public void validarTexto() {
+        final String ESPACIO = " ";
+        String cadena = "JOE        WATZSON    ";
+        String regex = "\\s{2,}";
+        Pattern patron = Pattern.compile(regex,Pattern.MULTILINE);
+        Matcher validador = patron.matcher(cadena);
+        String resultado = validador.replaceAll(ESPACIO).trim();
+        assertEquals("JOE WATZSON", resultado);
+    }
+
+
 }
