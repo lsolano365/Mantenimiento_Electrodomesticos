@@ -1,5 +1,7 @@
 package com.uco.mantenimientoelectrodomesticos;
 
+
+@SuppressWarnings("ALL")
 public class Propietario {
 
     private String idP;
@@ -8,8 +10,8 @@ public class Propietario {
     private String direccion;
     private String telefono;
 
-    public Propietario(String idPropietario, String nombre, String correo, String direccion, String telefono) {
-        this.idP = idPropietario;
+    public Propietario(String idP, String nombre, String correo, String direccion, String telefono) {
+        this.idP = idP;
         this.nombre = nombre;
         this.correo = correo;
         this.direccion = direccion;
@@ -55,6 +57,4 @@ public class Propietario {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-
 }
