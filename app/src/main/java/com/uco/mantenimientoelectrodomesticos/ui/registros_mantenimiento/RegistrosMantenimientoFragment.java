@@ -24,7 +24,7 @@ public class RegistrosMantenimientoFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_registrosmantenimiento, container, false);
 
-        ingresar = (Button) view.findViewById(R.id.btnIngresar);
+        ingresar = view.findViewById(R.id.btnIngresar);
 
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
