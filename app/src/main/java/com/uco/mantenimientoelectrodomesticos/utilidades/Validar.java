@@ -66,6 +66,22 @@ public class Validar {
         return mensage;
     }
 
+    public static String registroElectrodomestico(String nombreElectrodomestico, String marca, String serial){
+        String mensaje = "Se ha añadido el electrodomestico correctamente!";
+
+        if (unSoloEspacio(nombreElectrodomestico).isEmpty()){
+            mensaje = "Por favor rellene el campo nombre electrodoméstico";
+        }
+        if (unSoloEspacio(marca).isEmpty()){
+            mensaje = "por favor rellene el campo marca";
+        }
+        if (quitarEspacios(serial).isEmpty()){
+            mensaje = "Por favor rellene el campo serial";
+        }
+
+        return mensaje;
+    }
+
     private static boolean estaVacia(String cadena){
         return cadena.isEmpty() ? true:false;
     }
