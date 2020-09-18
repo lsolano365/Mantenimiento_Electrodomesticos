@@ -1,5 +1,7 @@
-package com.uco.mantenimientoelectrodomesticos;
+package com.uco.mantenimientoelectrodomesticos.modelo;
 
+
+@SuppressWarnings("ALL")
 public class Propietario {
 
     private String idP;
@@ -7,13 +9,15 @@ public class Propietario {
     private String correo;
     private String direccion;
     private String telefono;
+    private String fechaInicio;
 
-    public Propietario(String idPropietario, String nombre, String correo, String direccion, String telefono) {
-        this.idP = idPropietario;
+    public Propietario(String idP, String nombre, String correo, String direccion, String telefono, String fechaInicio) {
+        this.idP = idP;
         this.nombre = nombre;
         this.correo = correo;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.fechaInicio = fechaInicio;
     }
 
     public String getIdPropietario() {
@@ -56,5 +60,11 @@ public class Propietario {
         this.telefono = telefono;
     }
 
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
 
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
 }

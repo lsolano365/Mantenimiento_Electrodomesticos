@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabElect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_24"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="20dp"/>-->
+
+
+    <ScrollView xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        tools:ignore="MissingDefaultResource">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".vista.ui.registros_mantenimiento.RegistrosElectrodomesticosFragment"
+            >
+
+
+
+            <ListView
+                android:id="@+id/listViewElect"
+                android:layout_height="400dp"
+                android:layout_width="match_parent"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Electrodoméstico"
+                    android:textSize="18dp"
+                    android:textColor="@color/negro"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre del electrodoméstico"
+                    android:textSize="16dp"
+                    android:textColor="@color/subtitle"
+                    android:paddingTop="20dp"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtNombreElect"
+                    android:inputType="text"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marca"
+                    android:textSize="16dp"
+                    android:textColor="@color/subtitle"
+                    android:paddingTop="20dp"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:id="@+id/edtIMarca" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Serial"
+                    android:textSize="16dp"
+                    android:textColor="@color/subtitle"
+                    android:paddingTop="20dp"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:id="@+id/edtSerial" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diagnóstico"
+                    android:textSize="16dp"
+                    android:textColor="@color/subtitle"
+                    android:paddingTop="20dp"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:id="@+id/edtDiagnostico" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Observación técnica"
+                    android:textSize="16dp"
+                    android:textColor="@color/subtitle"
+                    android:paddingTop="20dp"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:id="@+id/edtObsTecn" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnGuardarElect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guardar"
+                android:background="@drawable/background_boton"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/blanco"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
