@@ -61,6 +61,23 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/edtNombreElect"
                     android:inputType="text"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Numero identificación del proprietario"
+                    android:textSize="16dp"
+                    android:textColor="@color/subtitle"
+                    android:paddingTop="20dp"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtIdProprietarioElect"
+                    android:inputType="text"/>
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

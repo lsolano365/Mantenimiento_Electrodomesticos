@@ -1,6 +1,10 @@
 package com.uco.mantenimientoelectrodomesticos.utilidades;
 
+import com.uco.mantenimientoelectrodomesticos.modelo.Electrodomestico;
 import com.uco.mantenimientoelectrodomesticos.modelo.Propietario;
+import com.uco.mantenimientoelectrodomesticos.vista.ui.home.RegistrosPropietarioFragment;
+import com.uco.mantenimientoelectrodomesticos.vista.ui.registros_mantenimiento.RegistrosElectrodomesticosFragment;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,11 +34,11 @@ public class Validar {
     }
 
 
-    public static boolean idProprietario(String identification, List<Propietario> lista){
+    public static boolean idProprietario(String identification){
         identification=quitarEspacios(identification);
         boolean encontrado=false;
-        if (!lista.isEmpty()){
-            for (Propietario propietario:lista) {
+        if (!RegistrosPropietarioFragment.listadoPropietarios.isEmpty()){
+            for (Propietario propietario:RegistrosPropietarioFragment.listadoPropietarios) {
                 if (propietario.getIdPropietario().equals(identification)){
                     encontrado=true;
                     break;
@@ -44,7 +48,21 @@ public class Validar {
         return encontrado;
     }
 
-    public static String registroProprietario(String idPropietario, String nombre, String correo, String direccion, String telefono, List<Propietario> lista){
+    public static boolean serialElectrodomestico(String identification){
+        identification=quitarEspacios(identification);
+        boolean encontrado=false;
+        if (!RegistrosElectrodomesticosFragment.listadoElectrodomesticos.isEmpty()){
+            for (Electrodomestico electrodomestico :RegistrosElectrodomesticosFragment.listadoElectrodomesticos) {
+                if (electrodomestico.getSerial().equals(identification)){
+                    encontrado=true;
+                    break;
+                }
+            }
+        }
+        return encontrado;
+    }
+
+    public static String registroProprietario(String idPropietario, String nombre, String correo, String direccion, String telefono){
 
         String mensage="SE HA REGISTRADO CORRECTAMENTE!!!";
         if (unSoloEspacio(direccion).isEmpty()) {
@@ -66,6 +84,8 @@ public class Validar {
         return mensage;
     }
 
+
+
     public static String registroElectrodomestico(String nombreElectrodomestico, String marca, String serial){
         String mensaje = "Se ha añadido el electrodomestico correctamente!";
 
@@ -80,6 +100,28 @@ public class Validar {
         }
 
         return mensaje;
+    }
+
+    public static Propietario buscarProprietario(String identification){
+        identification=quitarEspacios(identification);
+        Propietario encontrado=null;
+        if (!RegistrosPropietarioFragment.listadoPropietarios.isEmpty()){
+            for (Propietario propietario:RegistrosPropietarioFragment.listadoPropietarios) {
+                if (propietario.getIdPropietario().equals(identification)){
+                    encontrado = propietario;
+                    break;
+                }
+            }
+        }
+        return encontrado;
+    }
+
+    public static String obtenerIDproprietario(String identification){
+        try {
+            return buscarProprietario(identification).getIdPropietario();
+        }catch (Exception e){
+            return VACIO;
+        }
     }
 
     private static boolean estaVacia(String cadena){

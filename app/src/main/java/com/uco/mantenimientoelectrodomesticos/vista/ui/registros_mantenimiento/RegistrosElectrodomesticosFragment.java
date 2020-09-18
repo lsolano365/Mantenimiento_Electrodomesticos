@@ -26,14 +26,12 @@ import java.util.Date;
 public class RegistrosElectrodomesticosFragment extends Fragment {
 
 
-    private EditText nombreElectrodomestico, marca, serial, descripción, observacionTecnica;
+    private EditText nombreElectrodomestico, idProprietarioElect, marca, serial, descripción, observacionTecnica;
 
     private Button guardarElectrodomestico;
 
-    ArrayList<Electrodomestico> listadoElectrodomesticos = new ArrayList<>();
+    public static ArrayList<Electrodomestico> listadoElectrodomesticos = new ArrayList<>();
 
-
-    Propietario propietario;
     private Date objDate = new Date();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,6 +39,7 @@ public class RegistrosElectrodomesticosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_listado_mantenimiento, container, false);
 
         nombreElectrodomestico = (EditText) view.findViewById(R.id.edtNombreElect);
+        idProprietarioElect=(EditText) view.findViewById(R.id.edtIdProprietarioElect);
         marca = (EditText) view.findViewById(R.id.edtMarca);
         serial = (EditText) view.findViewById(R.id.edtSerial);
         descripción = (EditText) view.findViewById(R.id.edtDiagnostico);
@@ -59,38 +58,47 @@ public class RegistrosElectrodomesticosFragment extends Fragment {
 
     }
 
-    private void RegistrarElectrodomestico() {
+
+
+
+    public void RegistrarElectrodomestico() {
 
         String fecha = objDate.toString();
 
-        String idPropietario = propietario.getIdPropietario();
+        String idPropietario = Validar.obtenerIDproprietario(idProprietarioElect.getText().toString());
 
-
+        if (!idPropietario.isEmpty()){
             String mensaje = Validar.registroElectrodomestico(nombreElectrodomestico.getText().toString(),marca.getText().toString(),
                     serial.getText().toString());
 
-            if (mensaje.equals("Se ha añadido el electrodomestico correctamente!")){
+            boolean serialExist=Validar.serialElectrodomestico(serial.getText().toString());
 
-                Electrodomestico electrodomestico = new Electrodomestico(nombreElectrodomestico.getText().toString(), marca.getText().toString(), idPropietario, serial.getText().toString(),
-                                                    descripción.getText().toString(), observacionTecnica.getText().toString(),true, fecha);
+            if(!serialExist){
+                if (mensaje.equals("Se ha añadido el electrodomestico correctamente!")){
 
-                listadoElectrodomesticos.add(electrodomestico);
-                //añadir adaptador
-                Toast.makeText(getContext(),mensaje,Toast.LENGTH_LONG).show();
-                //Borrar los datos despues de un proceso con exito
-                nombreElectrodomestico.getText().clear();
-                marca.getText().clear();
-                serial.getText().clear();
-                descripción.getText().clear();
-                observacionTecnica.getText().clear();
+                    Electrodomestico electrodomestico = new Electrodomestico(nombreElectrodomestico.getText().toString(), marca.getText().toString(), idPropietario, serial.getText().toString(),
+                            descripción.getText().toString(), observacionTecnica.getText().toString(),true, fecha);
+
+                    listadoElectrodomesticos.add(electrodomestico);
+                    //añadir adaptador
+                    Toast.makeText(getContext(),mensaje,Toast.LENGTH_LONG).show();
+                    //Borrar los datos despues de un proceso con exito
+                    nombreElectrodomestico.getText().clear();
+                    marca.getText().clear();
+                    serial.getText().clear();
+                    descripción.getText().clear();
+                    observacionTecnica.getText().clear();
+
+                }else {
+                    Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+                }
 
             }else {
-                Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No puede registarlo con un serial que ya existe!" ,Toast.LENGTH_SHORT).show();
             }
 
+        }else{
+            Toast.makeText(getContext(), "El campo identification del proprietario no puede ser vacio!" ,Toast.LENGTH_SHORT).show();
+        }
     }
-
-
-
-
 }

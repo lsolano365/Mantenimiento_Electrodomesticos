@@ -34,7 +34,7 @@ public class RegistrosPropietarioFragment extends Fragment {
     private ListView list;
     Adaptador myAdapter;
     private Button guardar;
-    private ArrayList<Propietario> listadoPropietarios = new ArrayList<>();
+    public static List<Propietario> listadoPropietarios = new ArrayList<>();
     private Date objDate = new Date();
 
     private EditText nombre, correo, identificacion, direccion, telefono;
@@ -72,9 +72,9 @@ public class RegistrosPropietarioFragment extends Fragment {
 
         String fecha = objDate.toString();
 
-        if (!(Validar.idProprietario(identificacion.getText().toString(),listadoPropietarios))){
+        if (!(Validar.idProprietario(identificacion.getText().toString()))){
             String mensaje = Validar.registroProprietario(identificacion.getText().toString(),nombre.getText().toString(),
-                    correo.getText().toString(),direccion.getText().toString(),telefono.getText().toString(),listadoPropietarios);
+                    correo.getText().toString(),direccion.getText().toString(),telefono.getText().toString());
 
             if (mensaje.equals("SE HA REGISTRADO CORRECTAMENTE!!!")){
 
