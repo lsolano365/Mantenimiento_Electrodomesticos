@@ -1,24 +1,28 @@
-package com.uco.mantenimientoelectrodomesticos;
+package com.uco.mantenimientoelectrodomesticos.modelo;
 
 public class Electrodomestico {
 
-    private int idElectrodomestico;
+    private Propietario propietario;
+
+    private String idElectrodomestico;
     private String nombreElectrodomestico;
+    private String idPropietario;
     private String serial;
     private boolean activo;
 
-    public Electrodomestico(int idElectrodomestico, String nombreElectrodomestico, String serial, boolean activo) {
+    public Electrodomestico(String idElectrodomestico, String nombreElectrodomestico,String idPropietario, String serial, boolean activo) {
         this.idElectrodomestico = idElectrodomestico;
         this.nombreElectrodomestico = nombreElectrodomestico;
+        this.idPropietario = idPropietario;
         this.serial = serial;
         this.activo = activo;
     }
 
-    public int getIdElectrodomestico() {
+    public String getIdElectrodomestico() {
         return idElectrodomestico;
     }
 
-    public void setIdElectrodomestico(int idElectrodomestico) {
+    public void setIdElectrodomestico(String idElectrodomestico) {
         this.idElectrodomestico = idElectrodomestico;
     }
 
@@ -44,5 +48,13 @@ public class Electrodomestico {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public String getIdPropietario() {
+        return propietario.getIdPropietario();
+    }
+
+    public void setIdPropietario(String idPropietario) {
+        this.idPropietario = idPropietario;
     }
 }
